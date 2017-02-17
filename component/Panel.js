@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { findDOMNode } from 'react-dom';
-import {requestp,qry3,getmenu} from '../lib/client';
+import {requestp,qry3,getmenu,notifys,arranges} from '../lib/client';
 import Litem from './Litem';
 import Lmenu from './Lmenu';
 
@@ -23,6 +23,14 @@ export default class Panel extends React.Component {
     this.state.user[ind].isdone = e;
 	this.setState({user:this.state.user});
   }
+  usrset(){
+	  this.setState({user: this.state.user.map((item) => {
+                    item.value='';
+					item.isdone=false;
+                    return item;
+                })
+			});
+  }
   q3(ind) {
 	  console.log(ind);
     qry3(ind).then(dsp => {
@@ -34,8 +42,15 @@ export default class Panel extends React.Component {
 	})
       .catch(err => console.error(err));
   }
-  q4(){
-	  console.log("fshj");
+  notif(id){
+	 var trans=[];
+	 var tmp=this.state.user
+	 for(var i=0;i<tmp.length;i++){
+		 if(!tmp[i].value)continue;
+		 trans.push({'name':tmp[i].name,'value':tmp[i].value});
+	 }
+	 if(id==0)notifys(trans).then(this.usrset());
+	 else arranges(trans).then(this.usrset());
   }
   subm(e){
 	const inputNode = findDOMNode(this.refs.input);
@@ -60,8 +75,8 @@ export default class Panel extends React.Component {
 		  )}
 	  </ul>):null}
 	  </li>
-	  <li><a href="#" onClick={this.q4.bind(this)}>通知</a></li>
-	  <li><a href="#" onClick={this.q4.bind(this)}>安排</a></li>
+	  <li><a href="#" onClick={this.notif.bind(this,0)}>通知</a></li>
+	  <li><a href="#" onClick={this.notif.bind(this,1)}>安排</a></li>
 	  </ul>
 	  {this.state.user?(
         <ul className="list-group">
