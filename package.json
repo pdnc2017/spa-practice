@@ -18,6 +18,8 @@
     "bootstrap": "^3.3.7",
     "bootstrap-webpack": "0.0.5",
     "browser-request": "^0.3.3",
+    "connect-redis": "^3.2.0",
+    "cookie-parser": "^1.4.3",
     "css-loader": "^0.26.1",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^1.0.1",

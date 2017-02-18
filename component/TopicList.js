@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import {Link} from 'react-router'
-import {loginUsert,qry1,qry2} from '../lib/client';
+import {loginUser,qry1,qry2} from '../lib/client';
 
 export default class TopicList extends React.Component {
 
@@ -10,7 +10,7 @@ export default class TopicList extends React.Component {
   }
 
   componentDidMount() {
-	  loginUsert(1)
+	  loginUser()
       .then(user => {
 		  console.log('logcheck');
 		  if(user.count==1)this.setState({user});
@@ -35,7 +35,7 @@ export default class TopicList extends React.Component {
 	  {this.state.user?(
 	  <div>
 	  <ul className="nav navbar-nav navbar-right">
-	  {this.state.user.g==1?(<li>< Link to='/panel' >管理</Link></li>):(<li></li>)}
+	  {this.state.user.grade==1?(<li>< Link to='/panel' >管理</Link></li>):(<li></li>)}
 	  <li><a href="#" onClick={this.q1.bind(this)}>查询1</a></li>
 	  <li><a href="#" onClick={this.q2.bind(this)}>查询2</a></li>
 	  </ul>

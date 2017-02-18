@@ -35,7 +35,9 @@ export default class Panel extends React.Component {
 	  console.log(ind);
     qry3(ind).then(dsp => {
 		this.setState({user: this.state.user.map((item,i) => {
-                    item.value=dsp[i];
+                    item.name=dsp[i].name
+					item.value=dsp[i].latest;
+					item.isdone=false;
                     return item;
                 })
 			});
